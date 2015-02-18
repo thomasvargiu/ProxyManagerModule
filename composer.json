@@ -1,10 +1,10 @@
 {
-  "name":              "thomasvargiu/proxy-manager-module",
-  "description":       "A ZF2 which allow to configure and use Ocramius/ProxyManager via ServiceManager",
-  "type":              "library",
-  "license":           "MIT",
-  "homepage":          "https://github.com/thomasvargiu/ProxyManagerModule",
-  "keywords":          [
+  "name": "thomasvargiu/proxy-manager-module",
+  "description": "A ZF2 which allow to configure and use Ocramius/ProxyManager via ServiceManager",
+  "type": "library",
+  "license": "MIT",
+  "homepage": "https://github.com/thomasvargiu/ProxyManagerModule",
+  "keywords": [
     "zf2",
     "zend framework",
     "proxy",
@@ -15,29 +15,30 @@
   ],
   "authors": [
     {
-      "name":     "Thomasvargiu",
-      "email":    "tvargiu@gmail.com",
+      "name": "Thomas Vargiu",
+      "email": "tvargiu@gmail.com",
       "homepage": "http://thomasvargiu.com/"
     }
   ],
   "require": {
-    "php":                     ">=5.4",
+    "php": ">=5.4",
     "ocramius/proxy-manager": "~0.5",
-    "zendframework/zend-stdlib":  "~2.2",
-    "zendframework/zend-servicemanager":  "~2.2"
+    "zendframework/zend-stdlib": "~2.2",
+    "zendframework/zend-servicemanager": "~2.2",
+    "zendframework/zend-modulemanager": "~2.2"
   },
   "require-dev": {
-    "phpunit/phpunit":             "~4.0",
-    "squizlabs/php_codesniffer":   "1.5.*"
+    "phpunit/phpunit": "~4.0",
+    "squizlabs/php_codesniffer": "1.5.*"
   },
   "autoload": {
-    "psr-0": {
-      "ProxyManagerModule\\": "src"
+    "psr-4": {
+      "ProxyManagerModule\\": "src/"
     }
   },
   "autoload-dev": {
-    "psr-0": {
-      "ProxyManagerModuleTest\\": "tests"
+    "psr-4": {
+      "ProxyManagerModuleTest\\": "tests/ProxyManagerModuleTest"
     }
   }
 }
