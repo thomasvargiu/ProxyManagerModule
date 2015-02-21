@@ -36,7 +36,7 @@ abstract class AbstractRemoteObjectFactoryFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         /** @var Configuration $proxyManagerConfig */
-        $proxyManagerConfig = $serviceLocator->get('ProxyManagerModule\\Factory\\ConfigurationFactory');
+        $proxyManagerConfig = $serviceLocator->get('ProxyManager\\Configuration');
         $adapter = $this->getAdapter($serviceLocator, $proxyManagerConfig);
         return new Factory($adapter, $proxyManagerConfig);
     }
@@ -46,5 +46,5 @@ abstract class AbstractRemoteObjectFactoryFactory implements FactoryInterface
      * @param Configuration           $configuration
      * @return AdapterInterface
      */
-    abstract function getAdapter(ServiceLocatorInterface $serviceLocator, Configuration $configuration);
+    abstract protected function getAdapter(ServiceLocatorInterface $serviceLocator, Configuration $configuration);
 }

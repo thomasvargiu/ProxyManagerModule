@@ -34,7 +34,7 @@ class LazyLoadingGhostFactoryFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         /** @var \ProxyManager\Configuration $proxyManagerConfig */
-        $proxyManagerConfig = $serviceLocator->get('ProxyManagerModule\\Factory\\ConfigurationFactory');
+        $proxyManagerConfig = $serviceLocator->get('ProxyManager\\Configuration');
 
         return new Factory($proxyManagerConfig);
     }
