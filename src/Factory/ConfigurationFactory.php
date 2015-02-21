@@ -35,14 +35,14 @@ class ConfigurationFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $config = $serviceLocator->get('Config');
-        if (!isset($config['proxy_manager_factory'])) {
-            throw new Exception\InvalidArgumentException('Missing "proxy_manager_factory" config key');
+        if (!isset($config['proxy_manager_module'])) {
+            throw new Exception\InvalidArgumentException('Missing "proxy_manager_module" config key');
         }
-        $proxyConfig = $config['proxy_manager_factory'];
+        $proxyConfig = $config['proxy_manager_module'];
 
         if (!isset($proxyConfig['configuration'])) {
             throw new Exception\InvalidArgumentException(
-                'Missing "configuration" config key in "proxy_manager_factory"'
+                'Missing "configuration" config key in "proxy_manager_module"'
             );
         }
 
