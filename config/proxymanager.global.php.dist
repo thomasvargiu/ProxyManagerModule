@@ -1,0 +1,44 @@
+<?php
+return [
+    'proxy_manager_module' => [
+        'configuration' => [
+            /*
+             * Proxies namespace
+             *
+             * A namespace for proxies
+             */
+            // 'proxies_namespace' => '',
+
+            /*
+             * Proxies Target Directory
+             *
+             * Where to save proxies
+             */
+            // 'proxies_target_dir' => './data/ProxyManager',
+
+            /*
+             * Generator Strategy
+             *
+             * An instance of ProxyManager\GeneratorStrategy\GeneratorStrategyInterface
+             * or a service name in the service locator
+             */
+            // 'generator_strategy' => '',
+
+            /*
+             * Proxy autoloader
+             *
+             * An instance of ProxyManager\Autoloader\AutoloaderInterface
+             * or a service name in the service locator
+             */
+            // 'proxy_autoloader' => '',
+
+            /*
+             * Class name inflector
+             *
+             * An instance of ProxyManager\Inflector\ClassNameInflectorInterface
+             * or a service name in the service locator
+             */
+            // 'class_name_inflector' => '',
+        ]
+    ]
+];
