@@ -7,7 +7,6 @@ use ProxyManagerModule\Factory\AccessInterceptorValueHolderFactoryFactory as Fac
 
 class AccessInterceptorValueHolderFactoryFactoryTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testCreateService()
     {
         $configuration = new Configuration();

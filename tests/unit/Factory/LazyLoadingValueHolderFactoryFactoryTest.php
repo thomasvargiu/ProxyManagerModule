@@ -7,7 +7,6 @@ use ProxyManagerModule\Factory\LazyLoadingValueHolderFactoryFactory as Factory;
 
 class LazyLoadingValueHolderFactoryFactoryTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testCreateService()
     {
         $configuration = new Configuration();

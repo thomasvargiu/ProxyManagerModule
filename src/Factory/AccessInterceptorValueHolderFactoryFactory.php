@@ -24,11 +24,11 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 class AccessInterceptorValueHolderFactoryFactory implements FactoryInterface
 {
-
     /**
-     * Create service
+     * Create service.
      *
      * @param ServiceLocatorInterface $serviceLocator
+     *
      * @return mixed
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

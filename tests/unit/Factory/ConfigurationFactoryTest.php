@@ -6,7 +6,6 @@ use ProxyManagerModule\Factory\ConfigurationFactory;
 
 class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testCreateService()
     {
         $config = [
@@ -16,9 +15,9 @@ class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
                     'proxies_target_dir' => './data/ProxyManagerTestDir',
                     'generator_strategy' => 'GeneratorStrategy',
                     'proxy_autoloader' => 'ProxyAutoloader',
-                    'class_name_inflector' => 'ClassNameInflector'
-                ]
-            ]
+                    'class_name_inflector' => 'ClassNameInflector',
+                ],
+            ],
         ];
 
         $serviceLocator = $this->getMockBuilder('Zend\\ServiceManager\\ServiceLocatorInterface')
@@ -39,7 +38,7 @@ class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
                 ['Config', $config],
                 ['ProxyAutoloader', $proxyAutoloader],
                 ['GeneratorStrategy', $generatorStrategy],
-                ['ClassNameInflector', $classNameInflector]
+                ['ClassNameInflector', $classNameInflector],
             ]));
 
         $factory = new ConfigurationFactory();
@@ -65,11 +64,11 @@ class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
         $serviceLocator->expects($this->any())
             ->method('get')
             ->will($this->returnValueMap([
-                ['Config', $config]
+                ['Config', $config],
             ]));
 
         $factory = new ConfigurationFactory();
-        /** @var \ProxyManager\Configuration $configuration */
+        /* @var \ProxyManager\Configuration $configuration */
         $factory->createService($serviceLocator);
     }
 
@@ -80,18 +79,18 @@ class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
     public function testCreateServiceWithoutConfigurationKey()
     {
         $config = [
-            'proxy_manager_module' => []
+            'proxy_manager_module' => [],
         ];
         $serviceLocator = $this->getMockBuilder('Zend\\ServiceManager\\ServiceLocatorInterface')
             ->getMock();
         $serviceLocator->expects($this->any())
             ->method('get')
             ->will($this->returnValueMap([
-                ['Config', $config]
+                ['Config', $config],
             ]));
 
         $factory = new ConfigurationFactory();
-        /** @var \ProxyManager\Configuration $configuration */
+        /* @var \ProxyManager\Configuration $configuration */
         $factory->createService($serviceLocator);
     }
 }

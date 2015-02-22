@@ -25,11 +25,11 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 class ConfigurationFactory implements FactoryInterface
 {
-
     /**
-     * Create service
+     * Create service.
      *
      * @param ServiceLocatorInterface $serviceLocator
+     *
      * @return ProxyConfiguration
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
@@ -50,6 +50,7 @@ class ConfigurationFactory implements FactoryInterface
         if (isset($proxyConfig['configuration'])) {
             $this->setConfigurationConfig($serviceLocator, $factoryConfig, $proxyConfig['configuration']);
         }
+
         return $factoryConfig;
     }
 
@@ -57,14 +58,14 @@ class ConfigurationFactory implements FactoryInterface
      * @param ServiceLocatorInterface $serviceLocator
      * @param ProxyConfiguration      $factoryConfig
      * @param array                   $config
+     *
      * @return ProxyConfiguration
      */
     protected function setConfigurationConfig(
         ServiceLocatorInterface $serviceLocator,
         ProxyConfiguration $factoryConfig,
         array $config
-    )
-    {
+    ) {
         if (isset($config['proxies_namespace'])) {
             $factoryConfig->setProxiesNamespace($config['proxies_namespace']);
         }

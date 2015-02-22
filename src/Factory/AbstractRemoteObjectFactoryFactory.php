@@ -26,11 +26,11 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 abstract class AbstractRemoteObjectFactoryFactory implements FactoryInterface
 {
-
     /**
-     * Create service
+     * Create service.
      *
      * @param ServiceLocatorInterface $serviceLocator
+     *
      * @return mixed
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
@@ -38,12 +38,14 @@ abstract class AbstractRemoteObjectFactoryFactory implements FactoryInterface
         /** @var Configuration $proxyManagerConfig */
         $proxyManagerConfig = $serviceLocator->get('ProxyManager\\Configuration');
         $adapter = $this->getAdapter($serviceLocator, $proxyManagerConfig);
+
         return new Factory($adapter, $proxyManagerConfig);
     }
 
     /**
      * @param ServiceLocatorInterface $serviceLocator
      * @param Configuration           $configuration
+     *
      * @return AdapterInterface
      */
     abstract protected function getAdapter(ServiceLocatorInterface $serviceLocator, Configuration $configuration);

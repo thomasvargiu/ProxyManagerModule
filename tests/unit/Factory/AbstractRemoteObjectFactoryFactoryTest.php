@@ -6,7 +6,6 @@ use ProxyManager\Configuration;
 
 class AbstractRemoteObjectFactoryFactoryTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testCreateService()
     {
         $configuration = new Configuration();

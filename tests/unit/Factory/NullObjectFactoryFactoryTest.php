@@ -7,7 +7,6 @@ use ProxyManagerModule\Factory\NullObjectFactoryFactory as Factory;
 
 class NullObjectFactoryFactoryTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testCreateService()
     {
         $configuration = new Configuration();

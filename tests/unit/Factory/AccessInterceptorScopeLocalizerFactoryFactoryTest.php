@@ -7,7 +7,6 @@ use ProxyManagerModule\Factory\AccessInterceptorScopeLocalizerFactoryFactory as 
 
 class AccessInterceptorScopeLocalizerFactoryFactoryTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testCreateService()
     {
         $configuration = new Configuration();
