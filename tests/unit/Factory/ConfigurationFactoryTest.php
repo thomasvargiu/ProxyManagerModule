@@ -52,4 +52,46 @@ class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($proxyAutoloader, $configuration->getProxyAutoloader());
         $this->assertEquals($classNameInflector, $configuration->getClassNameInflector());
     }
+
+    /**
+     * @expectedException        \Zend\ServiceManager\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Missing "proxy_manager_module" config key
+     */
+    public function testCreateServiceWithoutRootKey()
+    {
+        $config = [];
+        $serviceLocator = $this->getMockBuilder('Zend\\ServiceManager\\ServiceLocatorInterface')
+            ->getMock();
+        $serviceLocator->expects($this->any())
+            ->method('get')
+            ->will($this->returnValueMap([
+                ['Config', $config]
+            ]));
+
+        $factory = new ConfigurationFactory();
+        /** @var \ProxyManager\Configuration $configuration */
+        $factory->createService($serviceLocator);
+    }
+
+    /**
+     * @expectedException        \Zend\ServiceManager\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Missing "configuration" config key in "proxy_manager_module"
+     */
+    public function testCreateServiceWithoutConfigurationKey()
+    {
+        $config = [
+            'proxy_manager_module' => []
+        ];
+        $serviceLocator = $this->getMockBuilder('Zend\\ServiceManager\\ServiceLocatorInterface')
+            ->getMock();
+        $serviceLocator->expects($this->any())
+            ->method('get')
+            ->will($this->returnValueMap([
+                ['Config', $config]
+            ]));
+
+        $factory = new ConfigurationFactory();
+        /** @var \ProxyManager\Configuration $configuration */
+        $factory->createService($serviceLocator);
+    }
 }
