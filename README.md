@@ -1,6 +1,13 @@
 # ProxyManagerModule
 
-[![Build Status](https://scrutinizer-ci.com/g/thomasvargiu/ProxyManagerModule/badges/build.png?b=master)](https://scrutinizer-ci.com/g/thomasvargiu/ProxyManagerModule/build-status/master) [![Code Coverage](https://scrutinizer-ci.com/g/thomasvargiu/ProxyManagerModule/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/thomasvargiu/ProxyManagerModule/?branch=master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/thomasvargiu/ProxyManagerModule/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/thomasvargiu/ProxyManagerModule/?branch=master) [![Latest Stable Version](https://poser.pugx.org/thomasvargiu/proxy-manager-module/v/stable.svg)](https://packagist.org/packages/thomasvargiu/proxy-manager-module) [![Total Downloads](https://poser.pugx.org/thomasvargiu/proxy-manager-module/downloads.svg)](https://packagist.org/packages/thomasvargiu/proxy-manager-module) [![Latest Unstable Version](https://poser.pugx.org/thomasvargiu/proxy-manager-module/v/unstable.svg)](https://packagist.org/packages/thomasvargiu/proxy-manager-module) [![License](https://poser.pugx.org/thomasvargiu/proxy-manager-module/license.svg)](https://packagist.org/packages/thomasvargiu/proxy-manager-module)
+[![Build Status](https://scrutinizer-ci.com/g/thomasvargiu/ProxyManagerModule/badges/build.png?b=master)](https://scrutinizer-ci.com/g/thomasvargiu/ProxyManagerModule/build-status/master)
+[![Code Coverage](https://scrutinizer-ci.com/g/thomasvargiu/ProxyManagerModule/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/thomasvargiu/ProxyManagerModule/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/thomasvargiu/ProxyManagerModule/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/thomasvargiu/ProxyManagerModule/?branch=master)
+[![Dependency Status](https://www.versioneye.com/user/projects/545f82008683321bc8000036/badge.svg?style=flat)](https://www.versioneye.com/user/projects/545f82008683321bc8000036)
+[![Latest Stable Version](https://poser.pugx.org/thomasvargiu/proxy-manager-module/v/stable.svg)](https://packagist.org/packages/thomasvargiu/proxy-manager-module)
+[![Total Downloads](https://poser.pugx.org/thomasvargiu/proxy-manager-module/downloads.svg)](https://packagist.org/packages/thomasvargiu/proxy-manager-module)
+[![Latest Unstable Version](https://poser.pugx.org/thomasvargiu/proxy-manager-module/v/unstable.svg)](https://packagist.org/packages/thomasvargiu/proxy-manager-module)
+[![License](https://poser.pugx.org/thomasvargiu/proxy-manager-module/license.svg)](https://packagist.org/packages/thomasvargiu/proxy-manager-module)
 
 **Status: development**
 
