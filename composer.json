@@ -33,7 +33,8 @@
   },
   "autoload": {
     "psr-4": {
-      "ProxyManagerModule\\": "src/"
+      "ProxyManagerModule\\": ["src/"],
+      "ProxyManagerModuleTest\\": "tests/unit/"
     }
   },
   "autoload-dev": {
