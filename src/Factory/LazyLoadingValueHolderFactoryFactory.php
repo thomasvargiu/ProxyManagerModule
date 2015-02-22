@@ -22,6 +22,11 @@ use ProxyManager\Factory\LazyLoadingValueHolderFactory as Factory;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
+/**
+ * Class LazyLoadingValueHolderFactoryFactory
+ *
+ * @package ProxyManagerModule\Factory
+ */
 class LazyLoadingValueHolderFactoryFactory implements FactoryInterface
 {
     /**

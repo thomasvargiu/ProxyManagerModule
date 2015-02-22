@@ -22,6 +22,11 @@ use ProxyManager\Factory\NullObjectFactory as Factory;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
+/**
+ * Class NullObjectFactoryFactory
+ *
+ * @package ProxyManagerModule\Factory
+ */
 class NullObjectFactoryFactory implements FactoryInterface
 {
     /**

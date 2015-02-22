@@ -24,6 +24,11 @@ use ProxyManager\Factory\RemoteObjectFactory as Factory;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
+/**
+ * Class AbstractRemoteObjectFactoryFactory
+ *
+ * @package ProxyManagerModule\Factory
+ */
 abstract class AbstractRemoteObjectFactoryFactory implements FactoryInterface
 {
     /**

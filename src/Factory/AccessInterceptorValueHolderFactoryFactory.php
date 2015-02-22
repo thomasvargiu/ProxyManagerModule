@@ -22,6 +22,11 @@ use ProxyManager\Factory\AccessInterceptorValueHolderFactory as Factory;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
+/**
+ * Class AccessInterceptorValueHolderFactoryFactory
+ *
+ * @package ProxyManagerModule\Factory
+ */
 class AccessInterceptorValueHolderFactoryFactory implements FactoryInterface
 {
     /**

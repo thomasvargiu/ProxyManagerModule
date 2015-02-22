@@ -22,6 +22,11 @@ use ProxyManager\Factory\AccessInterceptorScopeLocalizerFactory as Factory;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
+/**
+ * Class AccessInterceptorScopeLocalizerFactoryFactory
+ *
+ * @package ProxyManagerModule\Factory
+ */
 class AccessInterceptorScopeLocalizerFactoryFactory implements FactoryInterface
 {
     /**

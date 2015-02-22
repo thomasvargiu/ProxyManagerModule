@@ -23,6 +23,11 @@ use Zend\ServiceManager\Exception;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
+/**
+ * Class ConfigurationFactory
+ *
+ * @package ProxyManagerModule\Factory
+ */
 class ConfigurationFactory implements FactoryInterface
 {
     /**

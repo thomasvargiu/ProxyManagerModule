@@ -21,6 +21,12 @@ namespace ProxyManagerModule;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 
+/**
+ * Class Module
+ *
+ * @package ProxyManagerModule
+ * @codeCoverageIgnore
+ */
 class Module implements AutoloaderProviderInterface, ConfigProviderInterface
 {
     /**
@@ -43,9 +49,9 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
         return [
             'Zend\Loader\StandardAutoloader' => [
                 'namespaces' => [
-                    __NAMESPACE__ => __DIR__,
-                ],
-            ],
+                    __NAMESPACE__ => __DIR__
+                ]
+            ]
         ];
     }
 }
