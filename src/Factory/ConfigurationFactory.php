@@ -30,7 +30,7 @@ class ConfigurationFactory implements FactoryInterface
      * Create service
      *
      * @param ServiceLocatorInterface $serviceLocator
-     * @return mixed
+     * @return ProxyConfiguration
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
@@ -76,6 +76,7 @@ class ConfigurationFactory implements FactoryInterface
         if (isset($config['generator_strategy'])) {
             $strategy = $config['generator_strategy'];
             if (!is_object($strategy)) {
+                /** @var \ProxyManager\GeneratorStrategy\GeneratorStrategyInterface $strategy */
                 $strategy = $serviceLocator->get($strategy);
             }
             $factoryConfig->setGeneratorStrategy($strategy);
@@ -84,6 +85,7 @@ class ConfigurationFactory implements FactoryInterface
         if (isset($config['proxy_autoloader'])) {
             $autoloader = $config['proxy_autoloader'];
             if (!is_object($autoloader)) {
+                /** @var \ProxyManager\Autoloader\AutoloaderInterface $autoloader */
                 $autoloader = $serviceLocator->get($autoloader);
             }
             $factoryConfig->setProxyAutoloader($autoloader);
@@ -92,6 +94,7 @@ class ConfigurationFactory implements FactoryInterface
         if (isset($config['class_name_inflector'])) {
             $inflector = $config['class_name_inflector'];
             if (!is_object($inflector)) {
+                /** @var \ProxyManager\Inflector\ClassNameInflectorInterface $inflector */
                 $inflector = $serviceLocator->get($inflector);
             }
             $factoryConfig->setClassNameInflector($inflector);
