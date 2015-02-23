@@ -4,6 +4,12 @@ php:
   - 5.5
   - 5.6
   - hhvm
+  - hhvm-nightly
+
+matrix:
+  allow_failures:
+    - php: hhvm
+    - php: hhvm-nightly
 
 before_script:
   - curl -s http://getcomposer.org/installer | php
@@ -11,9 +17,8 @@ before_script:
 
 script:
   - mkdir -p build/logs
-  - php vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover build/logs/clover.xml
+  - php vendor/bin/phpunit -c phpunit.xml.dist --disallow-test-output --report-useless-tests --coverage-clover ./clover.xml
 
 after_script:
-  - php vendor/bin/coveralls
   - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
+  - php ocular.phar code-coverage:upload --format=php-clover ./clover.xml
