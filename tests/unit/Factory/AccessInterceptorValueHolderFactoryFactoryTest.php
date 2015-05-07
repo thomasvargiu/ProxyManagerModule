@@ -21,7 +21,7 @@ class AccessInterceptorValueHolderFactoryFactoryTest extends \PHPUnit_Framework_
 
         $factory = new Factory();
 
-        /** @var \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator */
+        /* @var \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator */
         $proxyFactory = $factory->createService($serviceLocator);
 
         static::assertInstanceOf('ProxyManager\\Factory\\AccessInterceptorValueHolderFactory', $proxyFactory);

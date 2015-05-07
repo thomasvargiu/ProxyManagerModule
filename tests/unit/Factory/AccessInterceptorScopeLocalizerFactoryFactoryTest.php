@@ -21,7 +21,7 @@ class AccessInterceptorScopeLocalizerFactoryFactoryTest extends \PHPUnit_Framewo
 
         $factory = new Factory();
 
-        /** @var \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator */
+        /* @var \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator */
         $proxyFactory = $factory->createService($serviceLocator);
 
         static::assertInstanceOf('ProxyManager\\Factory\\AccessInterceptorScopeLocalizerFactory', $proxyFactory);

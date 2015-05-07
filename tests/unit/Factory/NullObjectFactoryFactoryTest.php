@@ -21,7 +21,7 @@ class NullObjectFactoryFactoryTest extends \PHPUnit_Framework_TestCase
 
         $factory = new Factory();
 
-        /** @var \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator */
+        /* @var \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator */
         $proxyFactory = $factory->createService($serviceLocator);
 
         static::assertInstanceOf('ProxyManager\\Factory\\NullObjectFactory', $proxyFactory);

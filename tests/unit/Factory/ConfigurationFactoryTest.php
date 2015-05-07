@@ -58,7 +58,7 @@ class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
 
         $factory = new ConfigurationFactory();
 
-        /** @var \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator */
+        /* @var \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator */
         /** @var \ProxyManager\Configuration $configuration */
         $configuration = $factory->createService($serviceLocator);
 
@@ -89,7 +89,7 @@ class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
 
         $factory = new ConfigurationFactory();
 
-        /** @var \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator */
+        /* @var \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator */
         $factory->createService($serviceLocator);
     }
 
@@ -112,7 +112,7 @@ class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
 
         $factory = new ConfigurationFactory();
 
-        /** @var \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator */
+        /* @var \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator */
         $factory->createService($serviceLocator);
     }
 }

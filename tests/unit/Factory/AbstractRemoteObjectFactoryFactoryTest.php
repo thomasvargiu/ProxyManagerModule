@@ -27,8 +27,8 @@ class AbstractRemoteObjectFactoryFactoryTest extends \PHPUnit_Framework_TestCase
             ->method('getAdapter')
             ->will(static::returnValue($adapter));
 
-        /** @var \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator */
-        /** @var \ProxyManagerModule\Factory\AbstractRemoteObjectFactoryFactory $factory */
+        /* @var \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator */
+        /* @var \ProxyManagerModule\Factory\AbstractRemoteObjectFactoryFactory $factory */
         $proxyFactory = $factory->createService($serviceLocator);
 
         static::assertInstanceOf('ProxyManager\\Factory\\RemoteObjectFactory', $proxyFactory);
