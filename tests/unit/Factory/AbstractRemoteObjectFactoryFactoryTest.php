@@ -13,22 +13,24 @@ class AbstractRemoteObjectFactoryFactoryTest extends \PHPUnit_Framework_TestCase
         $serviceLocator = $this->getMockBuilder('Zend\\ServiceManager\\ServiceLocatorInterface')
             ->getMock();
 
-        $serviceLocator->expects($this->once())
+        $serviceLocator->expects(static::once())
             ->method('get')
-            ->with($this->equalTo('ProxyManager\\Configuration'))
-            ->will($this->returnValue($configuration));
+            ->with(static::equalTo('ProxyManager\\Configuration'))
+            ->will(static::returnValue($configuration));
 
         $adapter = $this->getMockBuilder('ProxyManager\\Factory\\RemoteObject\\AdapterInterface')
             ->getMock();
 
         $factory = $this->getMockForAbstractClass('ProxyManagerModule\\Factory\\AbstractRemoteObjectFactoryFactory');
 
-        $factory->expects($this->once())
+        $factory->expects(static::once())
             ->method('getAdapter')
-            ->will($this->returnValue($adapter));
+            ->will(static::returnValue($adapter));
 
+        /** @var \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator */
+        /** @var \ProxyManagerModule\Factory\AbstractRemoteObjectFactoryFactory $factory */
         $proxyFactory = $factory->createService($serviceLocator);
 
-        $this->assertInstanceOf('ProxyManager\\Factory\\RemoteObjectFactory', $proxyFactory);
+        static::assertInstanceOf('ProxyManager\\Factory\\RemoteObjectFactory', $proxyFactory);
     }
 }

@@ -56,7 +56,31 @@ return [
              * or a service name in the service locator
              */
             // 'class_name_inflector' => '',
-        ],
+
+            /*
+             * Signature generator
+             *
+             * An instance of ProxyManager\Signature\SignatureGeneratorInterface
+             * or a service name in the service locator
+             */
+            // 'signature_generator' => 'SignatureGenerator',
+
+            /*
+             * Signature checker
+             *
+             * An instance of ProxyManager\Signature\SignatureCheckerInterface
+             * or a service name in the service locator
+             */
+            // 'signature_checker' => 'SignatureChecker',
+
+            /*
+             * Class name signature generator
+             *
+             * An instance of ProxyManager\Signature\ClassSignatureGeneratorInterface
+             * or a service name in the service locator
+             */
+            // 'class_signature_generator' => 'ClassSignatureGenerator'
+        ]
     ],
     'service_manager' => [
         'factories' => [
@@ -70,7 +94,7 @@ return [
             'ProxyManager\\Factory\\LazyLoadingValueHolderFactory' =>
                 'ProxyManagerModule\\Factory\\LazyLoadingValueHolderFactoryFactory',
             'ProxyManager\\Factory\\NullObjectFactory' =>
-                'ProxyManagerModule\\Factory\\NullObjectFactoryFactory',
-        ],
-    ],
+                'ProxyManagerModule\\Factory\\NullObjectFactoryFactory'
+        ]
+    ]
 ];

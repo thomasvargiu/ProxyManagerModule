@@ -14,15 +14,16 @@ class AccessInterceptorScopeLocalizerFactoryFactoryTest extends \PHPUnit_Framewo
         $serviceLocator = $this->getMockBuilder('Zend\\ServiceManager\\ServiceLocatorInterface')
             ->getMock();
 
-        $serviceLocator->expects($this->once())
+        $serviceLocator->expects(static::once())
             ->method('get')
-            ->with($this->equalTo('ProxyManager\\Configuration'))
-            ->will($this->returnValue($configuration));
+            ->with(static::equalTo('ProxyManager\\Configuration'))
+            ->will(static::returnValue($configuration));
 
         $factory = new Factory();
 
+        /** @var \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator */
         $proxyFactory = $factory->createService($serviceLocator);
 
-        $this->assertInstanceOf('ProxyManager\\Factory\\AccessInterceptorScopeLocalizerFactory', $proxyFactory);
+        static::assertInstanceOf('ProxyManager\\Factory\\AccessInterceptorScopeLocalizerFactory', $proxyFactory);
     }
 }

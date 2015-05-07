@@ -18,7 +18,13 @@
 
 namespace ProxyManagerModule\Factory;
 
+use ProxyManager\Autoloader\AutoloaderInterface;
 use ProxyManager\Configuration as ProxyConfiguration;
+use ProxyManager\GeneratorStrategy\GeneratorStrategyInterface;
+use ProxyManager\Inflector\ClassNameInflectorInterface;
+use ProxyManager\Signature\ClassSignatureGeneratorInterface;
+use ProxyManager\Signature\SignatureCheckerInterface;
+use ProxyManager\Signature\SignatureGeneratorInterface;
 use Zend\ServiceManager\Exception;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -40,21 +46,19 @@ class ConfigurationFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $config = $serviceLocator->get('Config');
-        if (!isset($config['proxy_manager_module'])) {
+        if (!array_key_exists('proxy_manager_module', $config)) {
             throw new Exception\InvalidArgumentException('Missing "proxy_manager_module" config key');
         }
         $proxyConfig = $config['proxy_manager_module'];
 
-        if (!isset($proxyConfig['configuration'])) {
+        if (!array_key_exists('configuration', $proxyConfig)) {
             throw new Exception\InvalidArgumentException(
                 'Missing "configuration" config key in "proxy_manager_module"'
             );
         }
 
         $factoryConfig = new ProxyConfiguration();
-        if (isset($proxyConfig['configuration'])) {
-            $this->setConfigurationConfig($serviceLocator, $factoryConfig, $proxyConfig['configuration']);
-        }
+        $this->setConfigurationConfig($serviceLocator, $factoryConfig, $proxyConfig['configuration']);
 
         return $factoryConfig;
     }
@@ -71,39 +75,66 @@ class ConfigurationFactory implements FactoryInterface
         ProxyConfiguration $factoryConfig,
         array $config
     ) {
-        if (isset($config['proxies_namespace'])) {
+        if (array_key_exists('proxies_namespace', $config)) {
             $factoryConfig->setProxiesNamespace($config['proxies_namespace']);
         }
 
-        if (isset($config['proxies_target_dir'])) {
+        if (array_key_exists('proxies_target_dir', $config)) {
             $factoryConfig->setProxiesTargetDir($config['proxies_target_dir']);
         }
 
-        if (isset($config['generator_strategy'])) {
+        if (array_key_exists('generator_strategy', $config)) {
             $strategy = $config['generator_strategy'];
-            if (!is_object($strategy)) {
-                /** @var \ProxyManager\GeneratorStrategy\GeneratorStrategyInterface $strategy */
+            if (is_string($strategy)) {
+                /** @var GeneratorStrategyInterface $strategy */
                 $strategy = $serviceLocator->get($strategy);
             }
             $factoryConfig->setGeneratorStrategy($strategy);
         }
 
-        if (isset($config['proxy_autoloader'])) {
+        if (array_key_exists('proxy_autoloader', $config)) {
             $autoloader = $config['proxy_autoloader'];
-            if (!is_object($autoloader)) {
-                /** @var \ProxyManager\Autoloader\AutoloaderInterface $autoloader */
+            if (is_string($autoloader)) {
+                /** @var AutoloaderInterface $autoloader */
                 $autoloader = $serviceLocator->get($autoloader);
             }
             $factoryConfig->setProxyAutoloader($autoloader);
         }
 
-        if (isset($config['class_name_inflector'])) {
+        if (array_key_exists('class_name_inflector', $config)) {
             $inflector = $config['class_name_inflector'];
-            if (!is_object($inflector)) {
-                /** @var \ProxyManager\Inflector\ClassNameInflectorInterface $inflector */
+            if (is_string($inflector)) {
+                /** @var ClassNameInflectorInterface $inflector */
                 $inflector = $serviceLocator->get($inflector);
             }
             $factoryConfig->setClassNameInflector($inflector);
+        }
+
+        if (array_key_exists('signature_generator', $config)) {
+            $signatureGenerator = $config['signature_generator'];
+            if (is_string($signatureGenerator)) {
+                /** @var SignatureGeneratorInterface $signatureGenerator */
+                $signatureGenerator = $serviceLocator->get($signatureGenerator);
+            }
+            $factoryConfig->setSignatureGenerator($signatureGenerator);
+        }
+
+        if (array_key_exists('signature_checker', $config)) {
+            $signatureChecker = $config['signature_checker'];
+            if (is_string($signatureChecker)) {
+                /** @var SignatureCheckerInterface $signatureChecker */
+                $signatureChecker = $serviceLocator->get($signatureChecker);
+            }
+            $factoryConfig->setSignatureChecker($signatureChecker);
+        }
+
+        if (array_key_exists('class_signature_generator', $config)) {
+            $classSignatureChecker = $config['class_signature_generator'];
+            if (is_string($classSignatureChecker)) {
+                /** @var ClassSignatureGeneratorInterface $classSignatureChecker */
+                $classSignatureChecker = $serviceLocator->get($classSignatureChecker);
+            }
+            $factoryConfig->setClassSignatureGenerator($classSignatureChecker);
         }
 
         return $factoryConfig;
