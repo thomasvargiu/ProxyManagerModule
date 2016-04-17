@@ -59,7 +59,7 @@ class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
 
         $serviceLocator->expects(static::any())
             ->method('get')
-            ->will(static::returnCallback(function($name) use ($serviceMap) {
+            ->will(static::returnCallback(function ($name) use ($serviceMap) {
                 return $serviceMap[$name] ?? null;
             }));
 
