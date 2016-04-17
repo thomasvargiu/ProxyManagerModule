@@ -4,6 +4,7 @@ namespace ProxyManagerModuleTest\Factory;
 
 use ProxyManager\Configuration;
 use ProxyManagerModule\Factory\AccessInterceptorValueHolderFactoryFactory as Factory;
+use Zend\ServiceManager\ServiceManager;
 
 class AccessInterceptorValueHolderFactoryFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -11,7 +12,7 @@ class AccessInterceptorValueHolderFactoryFactoryTest extends \PHPUnit_Framework_
     {
         $configuration = new Configuration();
 
-        $serviceLocator = $this->getMockBuilder('Zend\\ServiceManager\\ServiceLocatorInterface')
+        $serviceLocator = $this->getMockBuilder(ServiceManager::class)
             ->getMock();
 
         $serviceLocator->expects(static::once())

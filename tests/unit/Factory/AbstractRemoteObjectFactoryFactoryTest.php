@@ -3,6 +3,7 @@
 namespace ProxyManagerModuleTest\Factory;
 
 use ProxyManager\Configuration;
+use Zend\ServiceManager\ServiceManager;
 
 class AbstractRemoteObjectFactoryFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -10,7 +11,7 @@ class AbstractRemoteObjectFactoryFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $configuration = new Configuration();
 
-        $serviceLocator = $this->getMockBuilder('Zend\\ServiceManager\\ServiceLocatorInterface')
+        $serviceLocator = $this->getMockBuilder(ServiceManager::class)
             ->getMock();
 
         $serviceLocator->expects(static::once())

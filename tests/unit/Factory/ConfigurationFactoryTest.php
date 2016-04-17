@@ -3,7 +3,7 @@
 namespace ProxyManagerModuleTest\Factory;
 
 use ProxyManagerModule\Factory\ConfigurationFactory;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\ServiceManager;
 
 class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,7 +24,8 @@ class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
             ]
         ];
 
-        $serviceLocator = $this->getMockBuilder(ServiceLocatorInterface::class)
+        $serviceLocator = $this->getMockBuilder(ServiceManager::class)
+            ->disableOriginalConstructor()
             ->getMock();
 
         $generatorStrategy = $this->getMockBuilder(\ProxyManager\GeneratorStrategy\GeneratorStrategyInterface::class)
@@ -46,17 +47,21 @@ class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
             $this->getMockBuilder(\ProxyManager\Signature\ClassSignatureGeneratorInterface::class)
             ->getMock();
 
+        $serviceMap = [
+            'config' => $config,
+            'ProxyAutoloader' => $proxyAutoloader,
+            'GeneratorStrategy' => $generatorStrategy,
+            'ClassNameInflector' => $classNameInflector,
+            'SignatureGenerator' => $signatureGenerator,
+            'SignatureChecker' => $signatureChecker,
+            'ClassSignatureGenerator' => $classSignatureGenerator
+        ];
+
         $serviceLocator->expects(static::any())
             ->method('get')
-            ->will(static::returnValueMap([
-                ['config', $config],
-                ['ProxyAutoloader', $proxyAutoloader],
-                ['GeneratorStrategy', $generatorStrategy],
-                ['ClassNameInflector', $classNameInflector],
-                ['SignatureGenerator', $signatureGenerator],
-                ['SignatureChecker', $signatureChecker],
-                ['ClassSignatureGenerator', $classSignatureGenerator]
-            ]));
+            ->will(static::returnCallback(function($name) use ($serviceMap) {
+                return $serviceMap[$name] ?? null;
+            }));
 
         $factory = new ConfigurationFactory();
 
@@ -66,12 +71,12 @@ class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
 
         static::assertEquals('ProxyNamespaceTest', $configuration->getProxiesNamespace());
         static::assertEquals('./data/ProxyManagerTestDir', $configuration->getProxiesTargetDir());
-        static::assertEquals($generatorStrategy, $configuration->getGeneratorStrategy());
-        static::assertEquals($proxyAutoloader, $configuration->getProxyAutoloader());
-        static::assertEquals($classNameInflector, $configuration->getClassNameInflector());
-        static::assertEquals($signatureGenerator, $configuration->getSignatureGenerator());
-        static::assertEquals($signatureChecker, $configuration->getSignatureChecker());
-        static::assertEquals($classSignatureGenerator, $configuration->getClassSignatureGenerator());
+        static::assertSame($generatorStrategy, $configuration->getGeneratorStrategy());
+        static::assertSame($proxyAutoloader, $configuration->getProxyAutoloader());
+        static::assertSame($classNameInflector, $configuration->getClassNameInflector());
+        static::assertSame($signatureGenerator, $configuration->getSignatureGenerator());
+        static::assertSame($signatureChecker, $configuration->getSignatureChecker());
+        static::assertSame($classSignatureGenerator, $configuration->getClassSignatureGenerator());
     }
 
     /**
@@ -81,13 +86,12 @@ class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
     public function testCreateServiceWithoutRootKey()
     {
         $config = [];
-        $serviceLocator = $this->getMockBuilder(ServiceLocatorInterface::class)
+        $serviceLocator = $this->getMockBuilder(ServiceManager::class)
             ->getMock();
-        $serviceLocator->expects(static::any())
+        $serviceLocator->expects(static::atLeastOnce())
             ->method('get')
-            ->will(static::returnValueMap([
-                ['config', $config]
-            ]));
+            ->with('config')
+            ->willReturn($config);
 
         $factory = new ConfigurationFactory();
 
@@ -104,13 +108,12 @@ class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
         $config = [
             'proxy_manager_module' => []
         ];
-        $serviceLocator = $this->getMockBuilder(ServiceLocatorInterface::class)
+        $serviceLocator = $this->getMockBuilder(ServiceManager::class)
             ->getMock();
-        $serviceLocator->expects(static::any())
+        $serviceLocator->expects(static::atLeastOnce())
             ->method('get')
-            ->will(static::returnValueMap([
-                ['config', $config]
-            ]));
+            ->with('config')
+            ->willReturn($config);
 
         $factory = new ConfigurationFactory();
 
