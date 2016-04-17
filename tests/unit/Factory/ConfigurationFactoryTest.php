@@ -3,6 +3,7 @@
 namespace ProxyManagerModuleTest\Factory;
 
 use ProxyManagerModule\Factory\ConfigurationFactory;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,31 +24,32 @@ class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
             ]
         ];
 
-        $serviceLocator = $this->getMockBuilder('Zend\\ServiceManager\\ServiceLocatorInterface')
+        $serviceLocator = $this->getMockBuilder(ServiceLocatorInterface::class)
             ->getMock();
 
-        $generatorStrategy = $this->getMockBuilder('ProxyManager\\GeneratorStrategy\\GeneratorStrategyInterface')
+        $generatorStrategy = $this->getMockBuilder(\ProxyManager\GeneratorStrategy\GeneratorStrategyInterface::class)
             ->getMock();
 
-        $proxyAutoloader = $this->getMockBuilder('ProxyManager\\Autoloader\\AutoloaderInterface')
+        $proxyAutoloader = $this->getMockBuilder(\ProxyManager\Autoloader\AutoloaderInterface::class)
             ->getMock();
 
-        $classNameInflector = $this->getMockBuilder('ProxyManager\\Inflector\\ClassNameInflectorInterface')
+        $classNameInflector = $this->getMockBuilder(\ProxyManager\Inflector\ClassNameInflectorInterface::class)
             ->getMock();
 
-        $signatureGenerator = $this->getMockBuilder('ProxyManager\\Signature\\SignatureGeneratorInterface')
+        $signatureGenerator = $this->getMockBuilder(\ProxyManager\Signature\SignatureGeneratorInterface::class)
             ->getMock();
 
-        $signatureChecker = $this->getMockBuilder('ProxyManager\\Signature\\SignatureCheckerInterface')
+        $signatureChecker = $this->getMockBuilder(\ProxyManager\Signature\SignatureCheckerInterface::class)
             ->getMock();
 
-        $classSignatureGenerator = $this->getMockBuilder('ProxyManager\\Signature\\ClassSignatureGeneratorInterface')
+        $classSignatureGenerator =
+            $this->getMockBuilder(\ProxyManager\Signature\ClassSignatureGeneratorInterface::class)
             ->getMock();
 
         $serviceLocator->expects(static::any())
             ->method('get')
             ->will(static::returnValueMap([
-                ['Config', $config],
+                ['config', $config],
                 ['ProxyAutoloader', $proxyAutoloader],
                 ['GeneratorStrategy', $generatorStrategy],
                 ['ClassNameInflector', $classNameInflector],
@@ -79,12 +81,12 @@ class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
     public function testCreateServiceWithoutRootKey()
     {
         $config = [];
-        $serviceLocator = $this->getMockBuilder('Zend\\ServiceManager\\ServiceLocatorInterface')
+        $serviceLocator = $this->getMockBuilder(ServiceLocatorInterface::class)
             ->getMock();
         $serviceLocator->expects(static::any())
             ->method('get')
             ->will(static::returnValueMap([
-                ['Config', $config]
+                ['config', $config]
             ]));
 
         $factory = new ConfigurationFactory();
@@ -102,12 +104,12 @@ class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
         $config = [
             'proxy_manager_module' => []
         ];
-        $serviceLocator = $this->getMockBuilder('Zend\\ServiceManager\\ServiceLocatorInterface')
+        $serviceLocator = $this->getMockBuilder(ServiceLocatorInterface::class)
             ->getMock();
         $serviceLocator->expects(static::any())
             ->method('get')
             ->will(static::returnValueMap([
-                ['Config', $config]
+                ['config', $config]
             ]));
 
         $factory = new ConfigurationFactory();

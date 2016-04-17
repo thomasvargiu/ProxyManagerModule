@@ -19,6 +19,7 @@
 
 namespace ProxyManagerModule\Factory;
 
+use Interop\Container\ContainerInterface;
 use ProxyManager\Factory\AccessInterceptorValueHolderFactory as Factory;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -29,17 +30,32 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class AccessInterceptorValueHolderFactoryFactory implements FactoryInterface
 {
     /**
+     * @param ContainerInterface $container
+     * @param string             $requestedName
+     * @param array|null         $options
+     * @return Factory
+     * @throws \Interop\Container\Exception\NotFoundException
+     * @throws \Interop\Container\Exception\ContainerException
+     * @throws \Zend\ServiceManager\Exception\ServiceNotFoundException
+     */
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
+        /** @var \ProxyManager\Configuration $proxyManagerConfig */
+        $proxyManagerConfig = $container->get('ProxyManager\\Configuration');
+
+        return new Factory($proxyManagerConfig);
+    }
+
+    /**
      * Create service.
      *
      * @param ServiceLocatorInterface $serviceLocator
-     *
-     * @return mixed
+     * @return Factory
+     * @throws \Interop\Container\Exception\ContainerException
+     * @throws \Zend\ServiceManager\Exception\ServiceNotFoundException
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        /** @var \ProxyManager\Configuration $proxyManagerConfig */
-        $proxyManagerConfig = $serviceLocator->get('ProxyManager\\Configuration');
-
-        return new Factory($proxyManagerConfig);
+        return $this($serviceLocator, Factory::class);
     }
 }

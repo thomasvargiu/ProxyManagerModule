@@ -11,7 +11,7 @@
 
 **Status: development**
 
-ZF2 module that allows simplified use of [Ocramius/ProxyManager](https://github.com/Ocramius/ProxyManager) registering factories in the service manager.
+Zend Framework module that allows simplified use of [Ocramius/ProxyManager](https://github.com/Ocramius/ProxyManager) registering factories in the service manager.
 
 ## Configuration ##
 
@@ -106,3 +106,8 @@ $proxyFactory = $serviceLocator->get('ProxyManager\\Factory\\LazyLoadingGhostFac
 ```
 
 Of course, you can register alias names in the ```service_manager``` config key.
+
+## Version 2
+
+The version 2 of this library is compatible with `zend-servicemanager` `^3.0` 
+and updated for `ocramius/proxy-manager` `^2.0`.

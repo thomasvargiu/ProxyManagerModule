@@ -16,6 +16,8 @@
  * and is licensed under the MIT license.
  */
 
+namespace ProxyManagerModule;
+
 return [
     'proxy_manager_module' => [
         'configuration' => [
@@ -84,17 +86,17 @@ return [
     ],
     'service_manager' => [
         'factories' => [
-            'ProxyManager\\Configuration' => 'ProxyManagerModule\\Factory\\ConfigurationFactory',
-            'ProxyManager\\Factory\\AccessInterceptorScopeLocalizerFactory' =>
-                'ProxyManagerModule\\Factory\\AccessInterceptorScopeLocalizerFactoryFactory',
-            'ProxyManager\\Factory\\AccessInterceptorValueHolderFactory' =>
-                'ProxyManagerModule\\Factory\\AccessInterceptorValueHolderFactoryFactory',
-            'ProxyManager\\Factory\\LazyLoadingGhostFactory' =>
-                'ProxyManagerModule\\Factory\\LazyLoadingGhostFactoryFactory',
-            'ProxyManager\\Factory\\LazyLoadingValueHolderFactory' =>
-                'ProxyManagerModule\\Factory\\LazyLoadingValueHolderFactoryFactory',
-            'ProxyManager\\Factory\\NullObjectFactory' =>
-                'ProxyManagerModule\\Factory\\NullObjectFactoryFactory'
+            'ProxyManager\Configuration' => Factory\ConfigurationFactory::class,
+            \ProxyManager\Factory\AccessInterceptorScopeLocalizerFactory::class =>
+                Factory\AccessInterceptorScopeLocalizerFactoryFactory::class,
+            \ProxyManager\Factory\AccessInterceptorValueHolderFactory::class =>
+                Factory\AccessInterceptorValueHolderFactoryFactory::class,
+            \ProxyManager\Factory\LazyLoadingGhostFactory::class =>
+                Factory\LazyLoadingGhostFactoryFactory::class,
+            \ProxyManager\Factory\LazyLoadingValueHolderFactory::class =>
+                Factory\LazyLoadingValueHolderFactoryFactory::class,
+            \ProxyManager\Factory\NullObjectFactory::class =>
+                Factory\NullObjectFactoryFactory::class
         ]
     ]
 ];

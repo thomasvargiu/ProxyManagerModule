@@ -19,6 +19,7 @@
 
 namespace ProxyManagerModule\Factory;
 
+use Interop\Container\ContainerInterface;
 use ProxyManager\Autoloader\AutoloaderInterface;
 use ProxyManager\Configuration as ProxyConfiguration;
 use ProxyManager\GeneratorStrategy\GeneratorStrategyInterface;
@@ -35,16 +36,20 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 class ConfigurationFactory implements FactoryInterface
 {
+
     /**
-     * Create service.
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     *
+     * @param ContainerInterface $container
+     * @param string             $requestedName
+     * @param array|null         $options
      * @return ProxyConfiguration
+     * @throws \Zend\ServiceManager\Exception\InvalidArgumentException
+     * @throws \Interop\Container\Exception\NotFoundException
+     * @throws \Interop\Container\Exception\ContainerException
+     * @throws \Zend\ServiceManager\Exception\ServiceNotFoundException
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $config = $serviceLocator->get('Config');
+        $config = $container->get('config');
         if (!array_key_exists('proxy_manager_module', $config)) {
             throw new Exception\InvalidArgumentException('Missing "proxy_manager_module" config key');
         }
@@ -57,20 +62,21 @@ class ConfigurationFactory implements FactoryInterface
         }
 
         $factoryConfig = new ProxyConfiguration();
-        $this->setConfigurationConfig($serviceLocator, $factoryConfig, $proxyConfig['configuration']);
+        $this->setConfigurationConfig($container, $factoryConfig, $proxyConfig['configuration']);
 
         return $factoryConfig;
     }
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @param ProxyConfiguration      $factoryConfig
-     * @param array                   $config
+     * @param ContainerInterface $container
+     * @param ProxyConfiguration $factoryConfig
+     * @param array              $config
      *
      * @return ProxyConfiguration
+     * @throws \Interop\Container\Exception\ContainerException
      */
     protected function setConfigurationConfig(
-        ServiceLocatorInterface $serviceLocator,
+        ContainerInterface $container,
         ProxyConfiguration $factoryConfig,
         array $config
     ) {
@@ -86,7 +92,7 @@ class ConfigurationFactory implements FactoryInterface
             $strategy = $config['generator_strategy'];
             if (is_string($strategy)) {
                 /** @var GeneratorStrategyInterface $strategy */
-                $strategy = $serviceLocator->get($strategy);
+                $strategy = $container->get($strategy);
             }
             $factoryConfig->setGeneratorStrategy($strategy);
         }
@@ -95,7 +101,7 @@ class ConfigurationFactory implements FactoryInterface
             $autoloader = $config['proxy_autoloader'];
             if (is_string($autoloader)) {
                 /** @var AutoloaderInterface $autoloader */
-                $autoloader = $serviceLocator->get($autoloader);
+                $autoloader = $container->get($autoloader);
             }
             $factoryConfig->setProxyAutoloader($autoloader);
         }
@@ -104,7 +110,7 @@ class ConfigurationFactory implements FactoryInterface
             $inflector = $config['class_name_inflector'];
             if (is_string($inflector)) {
                 /** @var ClassNameInflectorInterface $inflector */
-                $inflector = $serviceLocator->get($inflector);
+                $inflector = $container->get($inflector);
             }
             $factoryConfig->setClassNameInflector($inflector);
         }
@@ -113,7 +119,7 @@ class ConfigurationFactory implements FactoryInterface
             $signatureGenerator = $config['signature_generator'];
             if (is_string($signatureGenerator)) {
                 /** @var SignatureGeneratorInterface $signatureGenerator */
-                $signatureGenerator = $serviceLocator->get($signatureGenerator);
+                $signatureGenerator = $container->get($signatureGenerator);
             }
             $factoryConfig->setSignatureGenerator($signatureGenerator);
         }
@@ -122,7 +128,7 @@ class ConfigurationFactory implements FactoryInterface
             $signatureChecker = $config['signature_checker'];
             if (is_string($signatureChecker)) {
                 /** @var SignatureCheckerInterface $signatureChecker */
-                $signatureChecker = $serviceLocator->get($signatureChecker);
+                $signatureChecker = $container->get($signatureChecker);
             }
             $factoryConfig->setSignatureChecker($signatureChecker);
         }
@@ -131,11 +137,23 @@ class ConfigurationFactory implements FactoryInterface
             $classSignatureChecker = $config['class_signature_generator'];
             if (is_string($classSignatureChecker)) {
                 /** @var ClassSignatureGeneratorInterface $classSignatureChecker */
-                $classSignatureChecker = $serviceLocator->get($classSignatureChecker);
+                $classSignatureChecker = $container->get($classSignatureChecker);
             }
             $factoryConfig->setClassSignatureGenerator($classSignatureChecker);
         }
 
         return $factoryConfig;
+    }
+
+    /**
+     * Create service.
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     *
+     * @return ProxyConfiguration
+     */
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        return $this($serviceLocator, ProxyConfiguration::class);
     }
 }

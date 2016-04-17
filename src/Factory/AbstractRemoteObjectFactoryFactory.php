@@ -19,6 +19,7 @@
 
 namespace ProxyManagerModule\Factory;
 
+use Interop\Container\ContainerInterface;
 use ProxyManager\Configuration;
 use ProxyManager\Factory\RemoteObject\AdapterInterface;
 use ProxyManager\Factory\RemoteObjectFactory as Factory;
@@ -30,27 +31,40 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 abstract class AbstractRemoteObjectFactoryFactory implements FactoryInterface
 {
+
     /**
-     * Create service.
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     *
-     * @return mixed
+     * @param ContainerInterface $container
+     * @param string             $requestedName
+     * @param array|null         $options
+     * @return Factory
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         /** @var Configuration $proxyManagerConfig */
-        $proxyManagerConfig = $serviceLocator->get('ProxyManager\\Configuration');
-        $adapter = $this->getAdapter($serviceLocator, $proxyManagerConfig);
+        $proxyManagerConfig = $container->get('ProxyManager\\Configuration');
+        $adapter = $this->getAdapter($container, $proxyManagerConfig);
 
         return new Factory($adapter, $proxyManagerConfig);
     }
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @param Configuration           $configuration
+     * @param ContainerInterface $container
+     * @param Configuration      $configuration
      *
      * @return AdapterInterface
      */
-    abstract protected function getAdapter(ServiceLocatorInterface $serviceLocator, Configuration $configuration);
+    abstract protected function getAdapter(ContainerInterface $container, Configuration $configuration);
+
+    /**
+     * Create service.
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     *
+     * @return Factory
+     * @throws \Zend\ServiceManager\Exception\ServiceNotFoundException
+     */
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        return $this($serviceLocator, Factory::class);
+    }
 }
